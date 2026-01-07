@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovConnect - Home</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #0056b3; /* Trustworthy Blue */
+            --secondary-color: #f0f4f8; /* Light Grey Background */
+            --text-color: #333;
+            --accent-color: #ff9800; /* For alerts/highlights */
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            background-color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            /* Flex center for icons if added later */
+            display: flex;
+            align-items: center; 
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+        }
+
+        .btn-login:hover {
+            background-color: #004494;
+        }
+
+        /* --- HERO SECTION (CENTER SEARCH) --- */
+        .hero-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero-subtitle {
+            margin-bottom: 2rem;
+            color: #666;
+            max-width: 600px;
+        }
+
+        /* --- SEARCH BAR --- */
+        .search-wrapper {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 12px rgba(0, 86, 179, 0.15);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .search-btn:hover {
+            background-color: #004494;
+        }
+
+        /* --- HISTORY SUGGESTIONS --- */
+        .suggestions-container {
+            margin-top: 2rem;
+            max-width: 800px;
+        }
+
+        .suggestions-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tag {
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background-color: #e3f2fd; /* Light Blue hover */
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.9rem;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">GovConnect</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="mypolicy.html" target="_blank">My Policy</a></li>
+            <li><a href="preferences.html" target="_blank">Preferences</a></li>
+            <li><a href="alerts.html" target="_blank">Alerts <span style="color:red; margin-left:5px;">●</span></a></li>
+            <li><a href="factcheck.html" target="_blank">Fact Check</a></li>
+            <li><a href="profile.html" target="_blank" class="btn-login">Profile/Login</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero-container">
+        <h1 class="hero-title">Simplify Government Updates</h1>
+        <p class="hero-subtitle">Search for policies, verify information, and get AI-summarized updates on laws that matter to you.</p>
+
+        <div class="search-wrapper">
+            <input type="text" class="search-input" id="mainSearch" placeholder="Search for 'Education Policy', 'Tax Laws', 'Sports Grants'...">
+            <button class="search-btn" onclick="performSearch()">Search</button>
+        </div>
+
+        <div class="suggestions-container">
+            <span class="suggestions-label">Suggested based on your history:</span>
+            <div class="tags-wrapper" id="historyTags">
+                <span class="tag" onclick="fillSearch('New Education Policy')">New Education Policy</span>
+                <span class="tag" onclick="fillSearch('Farmers Scheme 2024')">Farmers Scheme 2024</span>
+                <span class="tag" onclick="fillSearch('Digital Privacy Law')">Digital Privacy Law</span>
+                <span class="tag" onclick="fillSearch('Cyber Security Rules')">Cyber Security Rules</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- JAVASCRIPT ---
+
+        // 1. Function to handle clicking a Suggestion Tag
+        function fillSearch(text) {
+            const searchInput = document.getElementById('mainSearch');
+            searchInput.value = text;
+            searchInput.focus();
+        }
+
+        // 2. Function to simulate search action
+        function performSearch() {
+            const query = document.getElementById('mainSearch').value;
+            if(query.trim() === "") {
+                alert("Please enter a topic to search.");
+                return;
+            }
+            
+            // For Hackathon Demo: Log to console or alert
+            console.log("Searching backend for:", query);
+            alert("Searching for: " + query + "\n(This would trigger your API call to Gemini)");
+            
+            // In real app: window.location.href = `search_results.html?q=${query}`;
+        }
+
+        // 3. Dynamic "History" Mock Data
+        // If you want to show how it changes based on user, you can modify this array
+        const userHistoryTopics = [
+            "Scholarship Schemes",
+            "Road Safety Laws",
+            "Start-up India",
+            "Election Guidelines"
+        ];
+
+        // Example: Append extra tags dynamically on load (Optional)
+        const tagsContainer = document.getElementById('historyTags');
+        
+        userHistoryTopics.forEach(topic => {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.innerText = topic;
+            span.onclick = function() { fillSearch(topic); };
+            tagsContainer.appendChild(span);
+        });
+
+        // 4. Enter Key Listener for Search
+        document.getElementById('mainSearch').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>
