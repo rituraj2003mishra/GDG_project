@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovConnect - My Policy Feed</title>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --bg: #f4f7f6;
+            --white: #fff;
+            --text: #333;
+            --border: #ddd;
+        }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; height: 100vh; }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0; /* Prevent shrinking on small screens */
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 40px; text-decoration: none; }
+        
+        .menu-item {
+            padding: 12px 15px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: 0.2s;
+            display: block;
+        }
+        .menu-item:hover, .menu-item.active { background: #e3f2fd; color: var(--primary); font-weight: 600; }
+
+        /* MAIN CONTENT AREA */
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .page-title { font-size: 1.8rem; color: var(--text); }
+        
+        /* POLICY CARDS GRID */
+        .policy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            border-left: 5px solid var(--primary); /* Indicator color */
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .card-tag {
+            background: #eee; font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; color: #555; display: inline-block; margin-bottom: 10px;
+        }
+        .card-date { font-size: 0.85rem; color: #888; float: right; }
+        
+        .card h3 { margin: 10px 0; font-size: 1.2rem; color: var(--primary); }
+        .card p { font-size: 0.95rem; color: #555; line-height: 1.5; margin-bottom: 15px; }
+        
+        .btn-summary {
+            background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: 500;
+        }
+        .btn-summary:hover { background: #004494; }
+
+        /* MODAL FOR AI SUMMARY POPUP */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: white; padding: 30px; border-radius: 12px; width: 500px; max-width: 90%;
+            position: relative; animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn { from {transform: translateY(-20px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+        
+        .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; color: #888; }
+        .ai-badge { background: linear-gradient(45deg, #2196F3, #9C27B0); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="index.html" class="logo">GovConnect</a>
+        <a href="mypolicy.html" class="menu-item active">Your Feed</a>
+        <a href="#" class="menu-item">Bookmarks</a>
+        <a href="#" class="menu-item">Pending Acts</a>
+        <a href="preferences.html" class="menu-item">Settings</a>
+        <div style="margin-top: auto;">
+            <a href="index.html" class="menu-item">← Back Home</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1 class="page-title">My Policy Updates</h1>
+            <div style="color: #666;">User: <b>Demo User</b></div>
+        </div>
+
+        <div class="policy-grid">
+            <div class="card">
+                <span class="card-tag">Education</span>
+                <span class="card-date">Today, 10:00 AM</span>
+                <h3>NEP 2024 Revisions</h3>
+                <p>Government introduces new vocational training modules for higher secondary schools...</p>
+                <button class="btn-summary" onclick="openModal('NEP 2024 Revisions', 'AI Summary: The government has mandated 20 hours of vocational training per semester for classes 11-12. This aims to improve employability immediately after school.')">Read AI Summary</button>
+            </div>
+
+            <div class="card" style="border-left-color: #ff9800;">
+                <span class="card-tag">Finance</span>
+                <span class="card-date">Yesterday</span>
+                <h3>New Tax Slab Adjustment</h3>
+                <p>Updates regarding the standard deduction limit for salaried employees have been proposed...</p>
+                <button class="btn-summary" onclick="openModal('Tax Slab Update', 'AI Summary: Standard deduction increased by ₹5,000. New tax rebate limits proposed for income up to ₹7 Lakhs. Effective from next fiscal year.')">Read AI Summary</button>
+            </div>
+
+            <div class="card" style="border-left-color: #4caf50;">
+                <span class="card-tag">Environment</span>
+                <span class="card-date">2 days ago</span>
+                <h3>Green Energy Subsidy</h3>
+                <p>Solar panel installation subsidies for residential areas have been increased by 15%...</p>
+                <button class="btn-summary" onclick="openModal('Solar Subsidy', 'AI Summary: You can now claim up to 40% subsidy on rooftop solar panels. The application process is now fully digital via the national portal.')">Read AI Summary</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="aiModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="margin-top: 0;">Policy Title</h2>
+            <p style="margin-bottom: 15px;"><span class="ai-badge">AI Generated Summary</span></p>
+            <p id="modalText" style="line-height: 1.6; color: #444;">Loading summary...</p>
+            <button class="btn-summary" style="margin-top: 20px; background: #333;" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple Modal Logic
+        function openModal(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalText').innerText = text;
+            document.getElementById('aiModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('aiModal').style.display = 'none';
+        }
+        
+        // Close modal if clicking outside the box
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('aiModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
